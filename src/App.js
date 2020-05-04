@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Navbar} from "./components/Navbar";
+import {Home} from "./pages/Home";
+import {About} from "./pages/About";
+import {Profile} from "./pages/Profile";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <React.Fragment>
+            <Navbar/>
+            <div className="container pt-4">
+                <h1>Hello world React Hooks bootstrap</h1>
+                <button className="btn btn-success">Bootstrap</button>
+            </div>
+            <Home/>
+            <About/>
+            <Profile/>
+        </React.Fragment>
+
+    );
 }
 
 export default App;
