@@ -7,10 +7,9 @@ import {CLEAR_USERS, GET_REPOS, GET_USER, SEARCH_USERS, SET_LOADING} from "../ty
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET
 
-const withCreds = url =>{
+const withCreds = url => {
     return `${url}client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
 }
-
 
 export const GithubState = ({children}) => {
     const initialState = {
@@ -20,7 +19,6 @@ export const GithubState = ({children}) => {
         loading: false,
     };
 
-
     const [state, dispatch] = useReducer(githubReducer, initialState);
 
     const search = async value => {
@@ -28,7 +26,6 @@ export const GithubState = ({children}) => {
         const response = await axios.get(
             withCreds(`https://api.github.com/search/users?q=${value}&`)
         )
-        // console.log('response',response)
         dispatch({
             type: SEARCH_USERS,
             payload: response.data.items
@@ -37,7 +34,7 @@ export const GithubState = ({children}) => {
     const getUser = async name => {
         setLoading();
         const response = await axios.get(
-           withCreds( `https://api.github.com/users/${name}?`)
+            withCreds(`https://api.github.com/users/${name}?`)
         )
         dispatch({
             type: GET_USER,
@@ -48,7 +45,7 @@ export const GithubState = ({children}) => {
     const getRepos = async name => {
         setLoading();
         const response = await axios.get(
-            withCreds( `https://api.github.com/users/${name}/repos?per_page=5&`)
+            withCreds(`https://api.github.com/users/${name}/repos?per_page=10&`)
         )
         dispatch({
             type: GET_REPOS,
@@ -58,7 +55,7 @@ export const GithubState = ({children}) => {
     const clearUsers = () => dispatch({type: CLEAR_USERS});
     const setLoading = () => dispatch({type: SET_LOADING});
 
-    const {user, users, repos, loading}=state;
+    const {user, users, repos, loading} = state;
 
     return (
         <GithubContext.Provider value={{

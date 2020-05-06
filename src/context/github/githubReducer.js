@@ -22,7 +22,8 @@ const handlers = {
     }),
     [SET_LOADING]: (state) => ({
         ...state,
-        loading: true}),
+        loading: true
+    }),
     DEFAULT: (state) => state,
 };
 
