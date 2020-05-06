@@ -1,22 +1,35 @@
 import React from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+
 import {Navbar} from "./components/Navbar";
 import {Home} from "./pages/Home";
 import {About} from "./pages/About";
 import {Profile} from "./pages/Profile";
+import {Alert} from "./components/Alert";
+import {AlertState} from "./context/alert/AlertState";
+import {GithubState} from "./context/github/GithubState";
 
 
 function App() {
     return (
-        <React.Fragment>
-            <Navbar/>
-            <div className="container pt-4">
-                <h1>Hello world React Hooks bootstrap</h1>
-                <button className="btn btn-success">Bootstrap</button>
-            </div>
-            <Home/>
-            <About/>
-            <Profile/>
-        </React.Fragment>
+        <GithubState>
+            <AlertState>
+                <BrowserRouter>
+                    <Navbar/>
+                    <div className="container pt-4">
+                        <Alert alert={{
+                            text: 'Alert text',
+                            type: 'primary',
+                        }}/>
+                        <Switch>
+                            <Route path='/about' component={About}/>
+                            <Route path='/profile/:name' component={Profile}/>
+                            <Route path='/' component={Home} exact/>
+                        </Switch>
+                    </div>
+                </BrowserRouter>
+            </AlertState>
+        </GithubState>
 
     );
 }
